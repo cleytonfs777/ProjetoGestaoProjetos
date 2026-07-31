@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Corporativo de Processos do CBMMG</title>
+<link rel="icon" type="image/png" href="brasao.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="top-brand">
+    <img src="brasao.png" alt="Brasão do Corpo de Bombeiros Militar de Minas Gerais">
+    <div><strong>Portal Corporativo de Processos</strong><span>Corpo de Bombeiros Militar de Minas Gerais</span></div>
+  </div>
+  <div class="search"><input id="globalSearch" placeholder="Pesquisar processo, subprocesso, sigla..."></div>
+  <div class="top-actions">
+    <button onclick="setView('mine')">☆ <span>Favoritos</span></button>
+    <button>♧ <span>Avisos</span></button>
+    <button>♙ <span>Entrar</span></button>
+  </div>
+</header>
+<aside class="sidebar">
+  <nav class="nav">
+    <button class="nav-item active" data-view="home"><span class="icon">⌂</span><span>Página inicial</span></button>
+    <button class="nav-item" data-view="catalog"><span class="icon">▦</span><span>Catálogo Institucional de Processos</span></button>
+    <button class="nav-item" data-view="dashboard"><span class="icon">▥</span><span>Painéis Gerenciais</span></button>
+    <button class="nav-item" data-view="norms"><span class="icon">▤</span><span>Normativos e Metodologia</span></button>
+    <button class="nav-item" data-view="governance"><span class="icon">⚙</span><span>Governança de Processos</span></button>
+  </nav>
+  <div class="help-card"><strong>Precisa de ajuda?</strong><p>Entre em contato com o Guardião da Metodologia.</p><button>Fale conosco ↗</button></div>
+</aside>
+
+<main class="main">
+<section class="content" id="view">
+  <div class="catalog-header">
+    <h1>Portal Corporativo de Processos</h1>
+    <p>Carregando a Arquitetura Corporativa de Processos do CBMMG...</p>
+  </div>
+  <div class="catalog-grid">
+    <div class="catalog-card"><div class="overline">Dimensão</div><h3>Gerenciais</h3><p>Governança, planejamento, integração e gestão da informação.</p></div>
+    <div class="catalog-card"><div class="overline">Dimensão</div><h3>Finalísticos</h3><p>Gestão do risco, resposta a desastres e segurança contra incêndio e pânico.</p></div>
+    <div class="catalog-card"><div class="overline">Dimensão</div><h3>Suporte</h3><p>Logística, finanças, pessoas, comunicação e ensino.</p></div>
+  </div>
+</section>
+</main>
+</div>
+
+<script src="auth.js"></script>
+<script src="session-ui.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrar — Portal Corporativo de Processos do CBMMG</title>
+<link rel="icon" type="image/png" href="brasao.png">
+<link rel="stylesheet" href="login.css">
+</head>
+<body>
+<div class="login-shell">
+  <div class="login-card">
+    <div class="login-brand">
+      <img src="brasao.png" alt="Brasão do Corpo de Bombeiros Militar de Minas Gerais">
+      <div>
+        <strong>Portal Corporativo de Processos</strong>
+        <span>Corpo de Bombeiros Militar de Minas Gerais</span>
+      </div>
+    </div>
+
+    <div class="login-body">
+      <h1>Acesso ao Portal</h1>
+      <p class="login-lead">Informe suas credenciais institucionais para continuar.</p>
+
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="usuario">Usuário</label>
+          <input id="usuario" name="usuario" type="text" autocomplete="username"
+                 placeholder="Ex.: admin" autofocus>
+        </div>
+        <div class="field">
+          <label for="senha">Senha</label>
+          <div class="senha-wrap">
+            <input id="senha" name="senha" type="password" autocomplete="current-password"
+                   placeholder="••••••••">
+            <button type="button" class="toggle-senha" id="toggleSenha" aria-label="Mostrar senha">👁</button>
+          </div>
+        </div>
+
+        <label class="lembrar">
+          <input type="checkbox" id="lembrar"> Manter-me conectado neste dispositivo
+        </label>
+
+        <div class="login-alert hidden" id="loginAlert"></div>
+
+        <button type="submit" class="btn-entrar">Entrar</button>
+      </form>
+
+      <div class="login-hint">
+        <strong>Protótipo:</strong> use <code>admin</code> / <code>admin123</code> para acessar.
+      </div>
+    </div>
+  </div>
+
+  <p class="login-footer">© Corpo de Bombeiros Militar de Minas Gerais — Ambiente de protótipo</p>
+</div>
+
+<script src="auth.js"></script>
+<script src="login.js"></script>
+</body>
+</html>
