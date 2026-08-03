@@ -10,7 +10,7 @@
   const USUARIOS = [
     {
       login: "admin",
-      senha: "admin123",
+      senha: "admin",
       nome: "Administrador do Portal",
       posto: "Gestor da Metodologia",
       unidade: "SDTS / DLF",
