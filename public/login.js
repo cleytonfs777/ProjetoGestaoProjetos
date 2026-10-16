@@ -1,12 +1,13 @@
 // ==========================================================================
-// Login do protótipo — autenticação client-side (NÃO usar em produção).
-// Credenciais de exemplo definidas em auth.js: admin / admin123
+// Login do protótipo — credenciais validadas no servidor via /api/login
+// (AUTH_USER / AUTH_PASSWORD).
 // ==========================================================================
 
 const form   = document.getElementById("loginForm");
 const alertEl = document.getElementById("loginAlert");
 const toggle = document.getElementById("toggleSenha");
 const senha  = document.getElementById("senha");
+const btnEntrar = form.querySelector(".btn-entrar");
 
 // Se já estiver autenticado, vai direto para o portal.
 if (window.PortalAuth && PortalAuth.getUsuario()) {
@@ -26,7 +27,7 @@ function mostrarErro(msg) {
   alertEl.classList.remove("hidden");
 }
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
   alertEl.classList.add("hidden");
 
@@ -39,14 +40,21 @@ form.addEventListener("submit", (e) => {
     return;
   }
 
-  const perfil = PortalAuth.autenticar(usuario, password);
-  if (!perfil) {
-    mostrarErro("Usuário ou senha inválidos.");
-    senha.value = "";
-    senha.focus();
-    return;
-  }
+  btnEntrar.disabled = true;
+  try {
+    const perfil = await PortalAuth.autenticar(usuario, password);
+    if (!perfil) {
+      mostrarErro("Usuário ou senha inválidos.");
+      senha.value = "";
+      senha.focus();
+      return;
+    }
 
-  PortalAuth.iniciarSessao(perfil, lembrar);
-  window.location.href = "index.html";
+    PortalAuth.iniciarSessao(perfil, lembrar);
+    window.location.href = "index.html";
+  } catch (err) {
+    mostrarErro("Não foi possível conectar ao servidor. Tente novamente.");
+  } finally {
+    btnEntrar.disabled = false;
+  }
 });

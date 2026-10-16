@@ -1,23 +1,9 @@
 // ==========================================================================
 // PortalAuth — módulo de autenticação/sessão do PROTÓTIPO.
-// Client-side apenas. Em produção, a validação de credenciais e a emissão
-// de sessão devem ocorrer no servidor (ex.: SSO institucional / Guardião).
+// Validação de credenciais ocorre no servidor (variáveis AUTH_USER / AUTH_PASSWORD).
 // ==========================================================================
 (function (global) {
   const CHAVE = "cbmmg.portal.sessao";
-
-  // Base de usuários de exemplo do protótipo.
-  const USUARIOS = [
-    {
-      login: "admin",
-      senha: "admin",
-      nome: "Administrador do Portal",
-      posto: "Gestor da Metodologia",
-      unidade: "SDTS / DLF",
-      perfil: "Administrador",
-      iniciais: "AP"
-    }
-  ];
 
   // storage escolhido conforme "manter conectado":
   //  - true  -> localStorage (persiste entre sessões do navegador)
@@ -26,14 +12,22 @@
     return [global.localStorage, global.sessionStorage];
   }
 
-  function autenticar(login, senha) {
-    const u = USUARIOS.find(
-      (x) => x.login.toLowerCase() === String(login).toLowerCase() && x.senha === senha
-    );
-    if (!u) return null;
-    // nunca devolve a senha para a sessão
-    const { senha: _omit, ...perfil } = u;
-    return perfil;
+  async function autenticar(login, senha) {
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ usuario: login, senha })
+    });
+
+    let data = null;
+    try {
+      data = await res.json();
+    } catch (e) {
+      return null;
+    }
+
+    if (!res.ok || !data?.ok || !data.perfil) return null;
+    return data.perfil;
   }
 
   function iniciarSessao(perfil, lembrar) {

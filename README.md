@@ -31,12 +31,17 @@ navegador via query string (`?view=catalog`, `?view=dashboard`, etc.).
 (ou qualquer servidor estático; abrir o index.html direto com file://
 também funciona porque não há fetch/XHR.)
 
-## Login do protótipo
+## Login
 
-Abra `login.html`. Credenciais de exemplo:
+Credenciais definidas por variáveis de ambiente (arquivo `.env` ou ambiente do sistema):
 
-    usuário: admin
-    senha:   admin123
+    AUTH_USER=admin
+    AUTH_PASSWORD=admin123
+
+Copie `.env.example` para `.env` e ajuste os valores. Em seguida:
+
+    npm start
+    # abra http://localhost:3000/login.html
 
 Ao entrar, o portal (`index.html`) mostra os dados do usuário no canto
 superior direito e um botão **Sair**. O `index.html` é protegido: sem
@@ -44,9 +49,8 @@ sessão ativa, redireciona para o login.
 
 - "Manter-me conectado" usa `localStorage` (persiste); desmarcado usa
   `sessionStorage` (some ao fechar a aba).
-- **É apenas protótipo:** as credenciais estão no `auth.js` (client-side)
-  e não oferecem segurança real. Em produção, autenticação e emissão de
-  sessão devem ficar no servidor (ex.: SSO institucional).
+- A validação ocorre no servidor (`POST /api/login` e Basic Auth de `/download`).
+  Em produção institucional, prefira SSO (ex.: Guardião).
 
 ## Deploy — Cloudflare Pages (recomendado, gratuito)
 
